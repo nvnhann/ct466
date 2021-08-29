@@ -9,12 +9,10 @@ function Login() {
     const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
 
-
     const handleSubmit = async (values) => {
         try {
             const rs = await dispatch(login(values));
-            unwrapResult(rs)
-
+            unwrapResult(rs);
         } catch (error) {
             enqueueSnackbar(error.message, {variant: 'error', autoHideDuration: 2000})
         }
@@ -22,6 +20,7 @@ function Login() {
     }
     return (
         <>
+
             <LoginForm onSubmit={handleSubmit}/>
         </>
     )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -7,12 +7,16 @@ import { alpha, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import {
+    Avatar,
     Badge,
-    Button,
+    Button, Menu, MenuItem,
     Typography
 } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from '../../Store/userSlice';
+import {useHistory, useRouteMatch} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -92,9 +96,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SearchAppBar() {
+export default function Header() {
+    const match = useRouteMatch();
     const classes = useStyles();
+    const Login = useSelector(state => state.user.current);
+    const isLogIn = !! Login.email;
+    const [anchorEl, setAnchorEl] = useState(null);
+    const openAuth = Boolean(anchorEl);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const Logout =()=>{
+        dispatch(logout());
+        history.push('/');
+    }
     return (
         <div className={classes.root}>
             <AppBar
@@ -102,7 +124,7 @@ export default function SearchAppBar() {
                 color="primary"
                 position="fixed"
             >
-                <Toolbar>
+                <Toolbar style={{minHeight: '96px'}}>
                     <IconButton
                         edge="start"
                         className={classes.menuButton}
@@ -137,18 +159,58 @@ export default function SearchAppBar() {
                                 <ShoppingCartIcon />
                             </Badge>
                         </IconButton>
-                        <Button
-                            color="inherit"
-                            className={classes.link}
-                            component='a'
-                            href='/login'
-                            endIcon={<ExitToAppIcon className="text-white"/>}
-                        >
-                            Đăng nhập
-                        </Button>
+                        {!isLogIn && (
+                            <Button
+                                color="inherit"
+                                className={classes.link}
+                                component='a'
+                                href={`${match.path}/login`}
+                                endIcon={<ExitToAppIcon className="text-white"/>}
+                                style={{textTransform: 'none'}}
+                            >
+                                Đăng nhập
+                            </Button>
+                        )}
+                        {isLogIn && (
+                            <div>
+                                <IconButton
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={handleMenu}
+                                    color="inherit"
+                                >
+                                    <Avatar className={classes.large} src="https://cdn.quasar.dev/img/boy-avatar.png"/>
+                                </IconButton>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'right',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'center',
+                                    }}
+                                    getContentAnchorEl={null}
+                                    keepMounted
+                                    open={openAuth}
+                                    onClose={handleClose}
+                                >
+                                    <MenuItem onClick={handleClose} style={{color: 'rgba(0, 0, 0, 0.87)'}} component='a' href='/profile'>Thông tin cá nhân</MenuItem>
+                                    <MenuItem onClick={handleClose} style={{color: 'rgba(0, 0, 0, 0.87)'}} component='a' href='/order'>Hóa đơn</MenuItem>
+                                    <MenuItem onClick={()=>{
+                                        Logout()
+                                        handleClose()
+                                    }} component='a'>Đăng xuất</MenuItem>
+                                </Menu>
+                            </div>
+                        )}
                     </div>
                 </Toolbar>
             </AppBar>
+
         </div>
     );
 }

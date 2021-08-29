@@ -8,3 +8,7 @@ body {
     text-align: left;
     background-color: #f8f8f8;
 }
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,45 +1,19 @@
 import React from 'react';
-import {Box, Button, Grid, Typography} from '@material-ui/core';
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import InputText from '../Form-control/InputText';
-import PasswordField from '../Form-control/PasswordField';
 import PropTypes from 'prop-types';
-import {makeStyles} from "@material-ui/core/styles";
-import background from '../../Assets/background.jpg'
+import Animate from "../Animate";
+import {Button, Typography} from "@material-ui/core";
+import InputText from "../Form-control/InputText";
+import PasswordField from "../Form-control/PasswordField";
 
-const useStyle = makeStyles(({
-    background: {
-        backgroundImage: `url(${background})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        height: '92.8vh'
-
-    },
-    or: {
-        display: 'flex',
-        marginTop: '2.4rem',
-        marginBottom: '2.4rem',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    formContent: {
-        display: "flex",
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-
-}));
 
 RegisterForm.propTypes = {
     onSubmit: PropTypes.func,
 }
 
 function RegisterForm(props) {
-    const classes = useStyle();
     const handleSubmit = async (value) => {
         const {onSubmit} = props;
         if (onSubmit) {
@@ -64,41 +38,58 @@ function RegisterForm(props) {
 
 
     return (
-        <Grid container direction="row" style={{marginTop: '4em'}}>
-            <Grid item container direction="column" alignContent="center" justifyContent="center" lg={4}>
-                <Grid item>
-                    <Box m={4} className={classes.formContent}>
-                        <Typography variant="h3" style={{lineHeight: 1, textAlign: 'center'}}>Đăng ký</Typography>
-                        <form
-                            name="loginForm"
-                            noValidate
-                            className={classes.formContent}
-                            onSubmit={form.handleSubmit(handleSubmit)}
-                        >
-                            <InputText name="email" lable="Email" form={form} fullWidth/>
-                            <PasswordField name="password" lable="Mật khẩu" form={form}/>
-                            <PasswordField name="repwd" lable="Nhập lại mật khẩu" form={form}/>
-
-                            <Button
-                                style={{width: '22.4rem', marginLeft: 'auto', marginRight: 'auto', marginTop: '1.6rem'}}
-                                variant="contained" color="primary"
-                                aria-label="signup"
-                                type="submit"
-                            >
-                                Đăng ký
-                            </Button>
-                        </form>
-                        <div className={classes.formContent} style={{marginTop: '2rem'}}>
-                            <span>Bạn đã có tài khoản?</span>
-                            <Typography component='a' href='/login'>Đăng nhập</Typography>
+        <Animate animation="transition.expandIn" delay={300}>
+            <div className="min-h-screen bg-gray-100 pt-28 flex flex-col justify-center ">
+                <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+                    <div
+                        className="absolute inset-0 bg-gradient-to-r  from-gray-300 to-gray-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+                    </div>
+                    <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+                        <div className="max-w-md mx-auto">
+                            <div>
+                                <h1 className="text-4xl text-center h3 font-semibold">Đăng ký tài khoản</h1>
+                            </div>
+                            <div className="divide-y divide-gray-200">
+                                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                                    <div className="relative">
+                                        <div className="flex flex-col items-center justify-center max-w-sm">
+                                            <form
+                                                name="loginForm"
+                                                noValidate
+                                                onSubmit={form.handleSubmit(handleSubmit)}
+                                            >
+                                                <InputText name="email" lable="Email" form={form} fullWidth/>
+                                                <PasswordField name="password" lable="Mật khẩu" form={form}/>
+                                                <PasswordField name="repwd" lable="Nhập lại mật khẩu" form={form}/>
+                                                <Button
+                                                    style={{
+                                                        width: '22.4rem',
+                                                        marginLeft: 'auto',
+                                                        marginRight: 'auto',
+                                                        marginTop: '1.6rem'
+                                                    }}
+                                                    variant="contained" color="primary"
+                                                    aria-label="signup"
+                                                    type="submit"
+                                                >
+                                                    Đăng ký
+                                                </Button>
+                                            </form>
+                                            <div className="flex flex-col items-center justify-center"
+                                                 style={{marginTop: '2rem'}}>
+                                                <span>Bạn đã có tài khoản?</span>
+                                                <Typography component='a' href='/app/login'>Đăng nhập</Typography>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </Box>
-                </Grid>
-            </Grid>
-            <Grid item container lg={8} className={classes.background}>
+                    </div>
+                </div>
+            </div>
+        </Animate>
 
-            </Grid>
-        </Grid>
     )
 }
 

@@ -16,7 +16,7 @@ export default createTheme({
             A200: '#9EA1A9',
             A400: '#5C616F',
             A700: '#2D323E',
-            main: 'rgb(35, 53, 78)',
+            main: '#6b7280',
             light: '#7D818C',
             dark: '#2D323E',
             contrastText: '#fff'
