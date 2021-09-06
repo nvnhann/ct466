@@ -11,7 +11,7 @@ function Register() {
         try {
             await userAPI.signup(values);
             enqueueSnackbar('Đăng ký thành công', {variant: 'success', autoHideDuration: 2000})
-            history.push("/login");
+            history.push("/app/login");
         } catch (error) {
             enqueueSnackbar(error.message, {variant: 'error', autoHideDuration: 2000})
             console.log(error)

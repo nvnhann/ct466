@@ -11,7 +11,7 @@ export default function Contact() {
                     </div>
                     <div className="py-2 px-6 text-2xl tracking-wide">Sđt: <a className="text-red-500" href="tel:0794351150">0794351150</a></div>
                     <div className="py-2 px-6 text-2xl tracking-wide">Email: <a className="text-red-500" href="mailto:nvnhan.dev@gmail.com">nvnhan.dev@gmail.com</a></div>
-                    <div className="py-2 px-6 text-2xl tracking-wide">Facebook: <a className="text-red-500" target="_blank" href="https://www.facebook.com/nvnhan.dev">Nhẫn</a></div>
+                    <div className="py-2 px-6 text-2xl tracking-wide">Facebook: <a className="text-red-500"  href="https://www.facebook.com/nvnhan.dev">Nhẫn</a></div>
                 </div>
             </div>
         </Animate>

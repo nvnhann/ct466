@@ -30,5 +30,18 @@ User.findEmail = (email, rs) =>{
     })
 }
 
+User.getRole = (email, res)=>{
+    sql.query(`SELECT ROLE from accounts where email = '${email}'`, (err, rs)=>{
+        if(err){
+            console.log('err: '+err);
+            return res(err, null);
+        }
+        if(rs.length){
+            return res(null, rs[0]);
+        }
+        res({kind: 'not_found'}, null);
+    })
+}
+
 
 module.exports = User;

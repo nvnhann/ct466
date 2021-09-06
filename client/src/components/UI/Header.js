@@ -198,8 +198,7 @@ export default function Header() {
                                     open={openAuth}
                                     onClose={handleClose}
                                 >
-                                    <MenuItem onClick={handleClose} style={{color: 'rgba(0, 0, 0, 0.87)'}} component='a' href='/profile'>Thông tin cá nhân</MenuItem>
-                                    <MenuItem onClick={handleClose} style={{color: 'rgba(0, 0, 0, 0.87)'}} component='a' href='/order'>Hóa đơn</MenuItem>
+                                    <MenuItem onClick={handleClose} style={{color: 'rgba(0, 0, 0, 0.87)'}} component='a' href='/app/profile'>Bảng điều khiển tài khoản</MenuItem>
                                     <MenuItem onClick={()=>{
                                         Logout()
                                         handleClose()
