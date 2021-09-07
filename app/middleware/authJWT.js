@@ -16,7 +16,7 @@ verifyToken = (req, res, next) =>{
                 message: 'Unauthorized!'
             })
         }
-        req.email = decoded.email;
+        req.idtk = decoded.idtk;
         next();
     })
 }

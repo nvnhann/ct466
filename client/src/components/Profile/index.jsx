@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Container, Grid, List, ListItem, ListItemText, Paper, Typography} from "@material-ui/core";
-import {Switch} from "react-router-dom";
 import {makeStyles} from "@material-ui/styles";
 import Account from "./Account";
 import AccountEdit from "./AccountEdit";

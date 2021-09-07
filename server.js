@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 require('./app/routers/user.router')(app);
+require('./app/routers/profile.router')(app);
 
 const PORT = process.env.PORT || 4000;
 

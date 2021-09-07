@@ -20,13 +20,14 @@ exports.signup = (req, res) =>{
                 message: err.message || "Some error occurred while creating the user."
             });
         else {
-            const token = jwt.sign({email: data.email}, config.secret, {
+            const token = jwt.sign({idtk: data.idtk}, config.secret, {
                 expiresIn: 86400 // 24 hours
             });
             res.send({
                 USER: {
                     email: data.email,
                     role: 'USER',
+                    id: data.idtk
                 },
                 accessToken: token
             });
@@ -41,7 +42,7 @@ exports.login = (req, res) =>{
         }
         const passwordIsValid = bcrypt.compareSync(
             req.body.password,
-            data.password
+            data.mat_khau
         );
         if(!passwordIsValid){
             return res.status(401).send({
@@ -49,13 +50,14 @@ exports.login = (req, res) =>{
                 accessToken: null
             })
         }
-        const token = jwt.sign({email: data.email}, config.secret, {
+        const token = jwt.sign({idtk: data.idtk}, config.secret, {
             expiresIn: 86400 // 24 hours
         });
         res.status(200).send({
             USER: {
                 email: data.email,
-                role: data.role
+                role: data.role,
+                id: data.idtk
             },
             accessToken: token
         })

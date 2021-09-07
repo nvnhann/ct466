@@ -7,7 +7,7 @@ const User = function (user){
 };
 
 User.create = (newUser, rs) =>{
-    sql.query("INSERT INTO accounts(email, password) VALUES (?,?)", [newUser.email, newUser.password], (err, _)=>{
+    sql.query("INSERT INTO tai_khoan(email, mat_khau) VALUES (?,?)", [newUser.email, newUser.password], (err, _)=>{
         if(err) {
             console.log(err);
             return rs(err, null);
@@ -19,7 +19,7 @@ User.create = (newUser, rs) =>{
     })
 }
 User.findEmail = (email, rs) =>{
-    sql.query(`SELECT * FROM accounts WHERE email = '${email}'`, (err, res)=>{
+    sql.query(`SELECT * FROM tai_khoan WHERE email = '${email}'`, (err, res)=>{
         if(err){
             console.log(err);
             return rs(err,null);
@@ -31,7 +31,7 @@ User.findEmail = (email, rs) =>{
 }
 
 User.getRole = (email, res)=>{
-    sql.query(`SELECT ROLE from accounts where email = '${email}'`, (err, rs)=>{
+    sql.query(`SELECT ROLE from tai_khoan where email = '${email}'`, (err, rs)=>{
         if(err){
             console.log('err: '+err);
             return res(err, null);

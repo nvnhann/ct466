@@ -21,6 +21,7 @@ const userSlice = createSlice({
         logout(state){
             state.current = {};
             localStorage.removeItem('user');
+            localStorage.removeItem('profile');
         }
     },
     extraReducers:{
