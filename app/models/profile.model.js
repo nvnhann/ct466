@@ -8,13 +8,14 @@ const Profile = function (profile){
 }
 
 Profile.create = (newProfile, rs) =>{
-    sql.query("INSERT INTO `thong_tin_tk` (`ho`, `ten`, `sdt`, `idtk`) VALUES (?,?,?,?)", [newProfile.lastname, newProfile.firstname, newProfile.phone, newProfile.idtk],(err,_)=>{
+    sql.query("INSERT INTO `thong_tin_tk` (`ho`, `ten`, `sdt`, `idtk`) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE `ho` = ?, `ten` = ?, `sdt`= ?",
+        [newProfile.lastname, newProfile.firstname, newProfile.phone, newProfile.idtk, newProfile.lastname, newProfile.firstname, newProfile.phone],(err,_)=>{
         if(err){
             console.log(err);
             return rs(err, null);
         }
         rs(null, {...newProfile});
-        console.log('Create proflie success!');
+        console.log('Create proflie successfully!');
     })
 }
 
@@ -30,5 +31,13 @@ Profile.get = (idtk, rs)=>{
         rs({kind: 'not_found'}, null);
     })
 }
-
+Profile.updateEmail = (email, idtk, res) =>{
+    sql.query("UPDATE tai_khoan SET email = ? WHERE idtk = ?", [email,idtk], (err, _)=>{
+        if(err){
+            console.log(err);
+            return res(err, null);
+        }
+        res(null, {...email})
+    })
+}
 module.exports = Profile;

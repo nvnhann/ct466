@@ -1,5 +1,5 @@
 const sql = require('./db');
-const bcrypt = require('bcryptjs');
+    const bcrypt = require('bcryptjs');
 
 const User = function (user){
     this.email = user.email;
@@ -34,6 +34,19 @@ User.getRole = (email, res)=>{
     sql.query(`SELECT ROLE from tai_khoan where email = '${email}'`, (err, rs)=>{
         if(err){
             console.log('err: '+err);
+            return res(err, null);
+        }
+        if(rs.length){
+            return res(null, rs[0]);
+        }
+        res({kind: 'not_found'}, null);
+    })
+}
+
+User.findPwd = (idtk, res)=>{
+    sql.query(`SELECT mat_khau FROM tai_khoan WHERE idtk = '${idtk}'`,(err, rs)=>{
+        if(err){
+            console.log(err)
             return res(err, null);
         }
         if(rs.length){

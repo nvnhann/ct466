@@ -1,5 +1,7 @@
 const  jwt = require('jsonwebtoken');
 const config = require("../config/auth.config");
+const bcrypt = require('bcryptjs');
+
 const  User = require("../models/user.model");
 
 verifyToken = (req, res, next) =>{
@@ -34,10 +36,25 @@ isAdmin = (req, res, next) =>{
     })
 }
 
+verifyPwd = (req, res, next)=>{
+    User.findPwd(req.idtk,(err, rs)=>{
+        if(err) {
+            return res.status(401).send({message: 'some err' + err})
+        } else {
+            bcrypt.compare(req.body.password, rs.mat_khau,(err, result)=>{
+                if(!result){
+                    return res.status(400).send({message: 'Mật khẩu không chính xác!'})
+                } else return next();
+            })
+        }
+    })
+
+}
 
 const authJwt = {
     verifyToken: verifyToken,
-    isAdmin: isAdmin
+    isAdmin: isAdmin,
+    verifyPwd: verifyPwd
 }
 
 module.exports = authJwt;

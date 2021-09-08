@@ -1,4 +1,5 @@
 const Profile = require('../models/profile.model');
+const User = require("../models/user.model");
 
 exports.create = (req, res) =>{
     if (!req.body) {
@@ -30,5 +31,17 @@ exports.get = (req, res) =>{
             return res.status(500).send({message: err})
         }
         else res.send(rs)
+    })
+}
+
+exports.updateEmail = (req, res)=>{
+    Profile.updateEmail(req.body.email, req.params.idtk, (err, rs)=>{
+        if(err){
+            console.log(err);
+            return res.status(500).send({
+                message: err
+            })
+        }
+        res.send({rs})
     })
 }
