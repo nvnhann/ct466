@@ -96,9 +96,22 @@ const useStyles = makeStyles((theme) => ({
 export default function HeaderAdmin() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
+    const [anchorElH, setAnchorElH] = useState(null);
+    const [selectedIndex, setSelectedIndex] = useState(1);
     const openAuth = Boolean(anchorEl);
     const dispatch = useDispatch();
     const history = useHistory();
+    const handleClickListItem = (event) => {
+        setAnchorElH(event.currentTarget);
+    };
+
+    const handleMenuItemClick = (event, index) => {
+        setSelectedIndex(index);
+        setAnchorElH(null);
+    };
+    const handleCloseH = () => {
+        setAnchorElH(null);
+    };
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -134,12 +147,6 @@ export default function HeaderAdmin() {
                         component='a'
                         href='/'
                     >RIKUO</Typography>
-
-                    <Button className={classes.menu}>Quản lý user</Button>
-                    <Button className={classes.menu}>Quản lý danh mục</Button>
-                    <Button className={classes.menu}>Quản lý thông tin</Button>
-                    <Button className={classes.menu}>Quản lý giao diện</Button>
-
                     <Typography variant="h6">
                         Hi Admin!
                     </Typography>

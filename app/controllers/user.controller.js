@@ -53,10 +53,11 @@ exports.login = (req, res) =>{
         const token = jwt.sign({idtk: data.idtk}, config.secret, {
             expiresIn: 86400 // 24 hours
         });
+        console.log(data)
         res.status(200).send({
             USER: {
                 email: data.email,
-                role: data.role,
+                role: data.quyen,
                 id: data.idtk
             },
             accessToken: token

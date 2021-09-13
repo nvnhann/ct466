@@ -30,8 +30,8 @@ User.findEmail = (email, rs) =>{
     })
 }
 
-User.getRole = (email, res)=>{
-    sql.query(`SELECT ROLE from tai_khoan where email = '${email}'`, (err, rs)=>{
+User.getRole = (idtk, res)=>{
+    sql.query(`SELECT quyen from tai_khoan where idtk = '${idtk}'`, (err, rs)=>{
         if(err){
             console.log('err: '+err);
             return res(err, null);

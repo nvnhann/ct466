@@ -18,7 +18,8 @@ app.get("/", (req, res) => {
 
 require('./app/routers/user.router')(app);
 require('./app/routers/profile.router')(app);
-
+require('./app/routers/OTP.router')(app)
+require('./app/routers/publisher.router')(app)
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {

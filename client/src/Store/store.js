@@ -1,10 +1,12 @@
 import userReducer from './userSlice';
-import profileReducer from  './profileSlice'
+import profileReducer from  './profileSlice';
+import loginReducer from './loginpageSlice'
 const {configureStore} = require('@reduxjs/toolkit');
 
 const rootReducer = {
     user: userReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    login: loginReducer
 }
 
 const store = configureStore({

@@ -6,12 +6,14 @@ import PropTypes from 'prop-types';
 import {makeStyles} from "@material-ui/core/styles";
 import background from '../../Assets/background.jpg'
 import Animate from "../Animate";
-import {Button, Divider, Typography} from "@material-ui/core";
+import {Button, Divider} from "@material-ui/core";
 import InputText from "../Form-control/InputText";
 import PasswordField from "../Form-control/PasswordField";
 import GoogleIcon from '../UI/GoogleIcon';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import {signInWithGoogle} from "../../firebase/firebase.utils";
+import {useDispatch} from "react-redux";
+import {registerpage} from "../../Store/loginpageSlice";
 
 const useStyle = makeStyles(({
     background: {
@@ -45,6 +47,7 @@ LoginForm.propTypes = {
 
 function LoginForm(props) {
     const classes = useStyle();
+    const dispatch = useDispatch();
     const handleSubmit = async (value) => {
         const {onSubmit} = props;
         if (onSubmit) {
@@ -134,7 +137,9 @@ function LoginForm(props) {
                                             </Button>
                                             <div className={classes.formContent}>
                                                 <span>Bạn chưa có tài khoản?</span>
-                                                <Typography component='a' href='/app/register'>Đăng ký tài khoản</Typography>
+                                                <Button style={{textTransform: 'none'}} onClick={()=>{
+                                                    dispatch(registerpage())
+                                                }}>Đăng ký tài khoản</Button>
                                             </div>
                                         </div>
                                     </div>

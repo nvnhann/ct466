@@ -33,7 +33,7 @@ axiosClient.interceptors.response.use(function (response) {
     //     axiosClient.defaults.headers.common['x-access-token'] = localStorage.getItem("x-access-token");
     // }
     //console.log(error.config)
-    if(config.url==="/api/user/signup" || config.url==="/api/user/login" || config.url==='/api/user/changepwd'){
+    if(config.url==="/api/user/signup" || config.url==="/api/user/login" || config.url==='/api/user/changepwd' || config.url==='/email/verifyemail' || config.url==='/email/otp'){
         throw new Error( data.message);
     }
     return Promise.reject(error);

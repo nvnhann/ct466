@@ -24,11 +24,11 @@ verifyToken = (req, res, next) =>{
 }
 
 isAdmin = (req, res, next) =>{
-    User.getRole(req.email, (err, rs)=>{
+    User.getRole(req.idtk, (err, rs)=>{
         if(err) {
             return res.status(401).send({message: 'some err' + err})
         }
-        if(rs.ROLE === 'ADMIN'){
+        if(rs.quyen === 'ADMIN'){
             return next();
         } else {
             return res.status(403).send({message: 'Require Admin Role'})
